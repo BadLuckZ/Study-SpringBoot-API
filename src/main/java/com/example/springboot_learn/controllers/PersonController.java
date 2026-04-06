@@ -4,6 +4,8 @@ import com.example.springboot_learn.entities.Person;
 import com.example.springboot_learn.repositories.PersonRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 // mark this class as a request handler
 @RequestMapping("/persons")
@@ -17,8 +19,8 @@ public class PersonController {
 
     // POST /persons
     // Body: {
-    //      firstname: "",
-    //      lastname: ""
+    //      fname: "",
+    //      lname: ""
     // }
     @PostMapping
     public String createPerson(@RequestBody Person person) {
@@ -31,5 +33,17 @@ public class PersonController {
     public String deletePerson(@PathVariable Integer id) {
         personRepository.delete(id);
         return "Person " +  id + " deleted!";
+    }
+
+    // GET /persons
+    @GetMapping
+    public List<Person> getAllPerson() {
+        return personRepository.getAll();
+    }
+
+    // GET /persons/{id}
+    @GetMapping("/{id}")
+    public Person getPersonById(@PathVariable Integer id) {
+        return personRepository.get(id);
     }
 }
