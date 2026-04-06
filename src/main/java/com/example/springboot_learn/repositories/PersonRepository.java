@@ -43,8 +43,15 @@ public class PersonRepository implements PersonDAO {
 
     @Override
     public List<Person> getAll() {
-        TypedQuery<Person> query = entityManager.createQuery("FROM Person", Person.class);
+        TypedQuery<Person> query = entityManager.createQuery("FROM Person ORDER BY id", Person.class);
         return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Integer id, Person person) {
+        person.setId(id);
+        entityManager.merge(person);
     }
 
 

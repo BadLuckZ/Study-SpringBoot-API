@@ -35,6 +35,17 @@ public class PersonController {
         return "Person " +  id + " deleted!";
     }
 
+    // PUT /persons/{id}
+    @PutMapping("/{id}")
+    public String updatePerson(@PathVariable Integer id, @RequestBody Person person) {
+        Person existingPerson = personRepository.get(id);
+        if (existingPerson == null) {
+            return "Person not found!";
+        }
+        personRepository.update(id, person);
+        return "Person " + id + " updated!";
+    }
+
     // GET /persons
     @GetMapping
     public List<Person> getAllPerson() {

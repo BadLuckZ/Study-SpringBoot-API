@@ -16,4 +16,7 @@ public interface PersonDAO {
 
     // ดึงข้อมูลทั้งหมดจาก Table Person
     List<Person> getAll();
+
+    // อัพเดทข้อมูลใน Table Person
+    void update(Integer id, Person person);
 }
